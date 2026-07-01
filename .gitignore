@@ -1,0 +1,7 @@
+node_modules/
+atlas-api/venv/
+.next/
+*.pyc
+__pycache__/
+.env
+.env.local
