@@ -1,7 +1,16 @@
+# Node
 node_modules/
-atlas-api/venv/
-.next/
-*.pyc
+dist/
+build/
+
+# Python
+venv/
 __pycache__/
+*.pyc
+
+# Environment
 .env
-.env.local
+
+# OS
+.DS_Store
+
