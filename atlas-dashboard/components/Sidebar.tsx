@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navItems = [
-  { label: 'Dashboard', href: '/dashboard', icon: '▦' },
-  { label: 'API', href: '/api-section', icon: '⇄' },
-]
+  { label: "Home", href: "/", icon: "▦" },
+  { label: "Atlas", href: "/devices/atlas", icon: "◎" },
+  { label: "Apollo", href: "/devices/apollo", icon: "◎" },
+  { label: "Hyperion", href: "/devices/hyperion", icon: "◎" },
+];
 
 export default function Sidebar() {
   const pathname = usePathname()
