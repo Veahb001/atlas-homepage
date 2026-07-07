@@ -23,6 +23,7 @@
 
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import ApiStatus from "@/components/ApiStatus";
 
 type DeviceStatus = "online" | "offline";
 
@@ -43,34 +44,35 @@ const devices = [
     name: "Atlas",
     role: "Main Server",
     status: "online" as const,
-    cpu: "null",
-    memory: "null",
-    disk: "null",
-    uptime: "null" 
+    cpu: null,
+    memory: null,
+    disk: null,
+    uptime: null 
   },
   {
     id: "apollo",
     name: "Apollo",
     role: "Primary Workstation",
     status: "online" as const,
-    cpu: "null",
-    memory: "null",
-    disk: "null",
-    uptime: "null" 
+    cpu: null,
+    memory: null,
+    disk: null,
+    uptime: null 
   },
   {
     id: "hyperion",
     name: "Hyperion",
     role: "Home PC",
     status: "online" as const,
-    cpu: "null",
-    memory: "null",
-    disk: "null",
-    uptime: "null" 
+    cpu: null,
+    memory: null,
+    disk: null,
+    uptime: null 
   },
 ];
 
 function statusColor(value: number) {
+  if (value === null) return "#484f58";
   return value > 80 ? "#f85149" : value > 60 ? "#d29922" : "#3fb950";
 }
 
@@ -93,9 +95,13 @@ export default function Home() {
           <p style={{ color: "#58a6ff", fontFamily: "monospace", fontSize: "0.75rem", margin: 0 }}>
             OLYMPUS / HOME
           </p>
-          <h1 style={{ color: "#e6edf3", fontWeight: 700, fontSize: "1.5rem", margin: 0 }}>
-            All Devices
-          </h1>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <h1 style={{ color: "#e6edf3", fontWeight: 700, fontSize: "1.5rem", margin: 0 }}>
+              All Devices
+            </h1>
+
+            <ApiStatus />
+          </div>
         </div>
 
         {/* Device cards */}
