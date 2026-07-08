@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from devices import devices
 
 app = FastAPI()
 
@@ -22,18 +23,33 @@ def health():
 def devices():
     return [
         {
-            "name": "Apollo",
-            "type": "Development Laptop",
-            "os": "Linux"
-        },
-        {
+            "id": "atlas",
             "name": "Atlas",
-            "type": "Home Server",
-            "os": "Ubuntu"
+            "role": "Main Server",
+            "status": "online",
+            "cpu": None,
+            "memory": None,
+            "disk": None,
+            "uptime": None,
         },
         {
+            "id": "apollo",
+            "name": "Apollo",
+            "role": "Primary Workstation",
+            "status": "online",
+            "cpu": None,
+            "memory": None,
+            "disk": None,
+            "uptime": None,
+        },
+        {
+            "id": "hyperion",
             "name": "Hyperion",
-            "type": "PC",
-            "os": "Windows"
-        }
+            "role": "Home PC",
+            "status": "online",
+            "cpu": None,
+            "memory": None,
+            "disk": None,
+            "uptime": None,
+        },
     ]

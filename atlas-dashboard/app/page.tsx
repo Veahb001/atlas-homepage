@@ -1,24 +1,3 @@
-// "use client";
-
-// import { useEffect, useState } from "react";
-
-// export default function Home() {
-//   const [cpu, setCpu] = useState(null);
-
-//   useEffect(() => {
-//     fetch("http://localhost:8000/cpu")
-//       .then((res) => res.json())
-//       .then((data) => setCpu(data.cpu));
-//   }, []);
-
-//   return (
-//     <div style={{ padding: 40 }}>
-//       <h1>Atlas</h1>
-//       <p>CPU Usage: {cpu ?? "loading..."}%</p>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -38,52 +17,50 @@ type Device = {
   uptime: string | null;
 };
 
-const devices = [
-  {
-    id: "atlas",
-    name: "Atlas",
-    role: "Main Server",
-    status: "online" as const,
-    cpu: null,
-    memory: null,
-    disk: null,
-    uptime: null 
-  },
-  {
-    id: "apollo",
-    name: "Apollo",
-    role: "Primary Workstation",
-    status: "online" as const,
-    cpu: null,
-    memory: null,
-    disk: null,
-    uptime: null 
-  },
-  {
-    id: "hyperion",
-    name: "Hyperion",
-    role: "Home PC",
-    status: "online" as const,
-    cpu: null,
-    memory: null,
-    disk: null,
-    uptime: null 
-  },
-];
 
 function statusColor(value: number) {
   if (value === null) return "#484f58";
-  return value > 80 ? "#f85149" : value > 60 ? "#d29922" : "#3fb950";
+  return value > 80
+    ? "#f85149"
+    : value > 60
+    ? "#d29922"
+    : "#3fb950";
 }
 
 export default function Home() {
-  const [cpu, setCpu] = useState<number | null>(null);
+  const [devices, setDevices] = useState<Device[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8000/cpu")
+    fetch("http://localhost:8000/devices")
       .then((res) => res.json())
-      .then((data) => setCpu(data.cpu));
-  }, []);
+      .then((data) => {
+      setDevices(data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      console.error(err);
+      setLoading(false);
+    });
+}, []);
+
+  if (loading) {
+    return(
+      <div
+      style={{
+        background: "#0d1117",
+        color: "#e6edf3",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        fontFamily: "monospace"
+      }}
+      >
+        Loading devices...
+      </div>
+    )
+  }
 
   return (
     <div style={{ display: "flex", minHeight: "100vh", background: "#0d1117" }}>
@@ -163,12 +140,12 @@ export default function Home() {
                               {label}
                             </span>
                             <span style={{ color: statusColor(value), fontFamily: "monospace", fontSize: "0.72rem" }}>
-                              {value}%
+                              {value === null ? "--" : `${value}%`}
                             </span>
                           </div>
                           <div style={{ background: "#21262d", borderRadius: "2px", height: "4px" }}>
                             <div style={{
-                              width: `${value}%`,
+                              width: `${value ?? 0}%`,
                               height: "100%",
                               background: statusColor(value),
                               borderRadius: "2px",
