@@ -1,17 +1,32 @@
 devices = [
-    {
-        "name": "Apollo",
-        "type": "Development Laptop",
-        "os": "Linux"
-    },
-    {
-        "name": "Atlas",
-        "type": "Home Server",
-        "os": "Ubuntu"
-    },
-    {
-        "name": "Hyperion",
-        "type": "Gaming PC",
-        "os": "Windows"
-    }
-]
+        {
+            "id": "atlas",
+            "name": "Atlas",
+            "role": "Main Server",
+            "status": "online",
+            "cpu": None,
+            "memory": None,
+            "disk": None,
+            "uptime": None,
+        },
+        {
+            "id": "apollo",
+            "name": "Apollo",
+            "role": "Primary Workstation",
+            "status": "online",
+            "cpu": None,
+            "memory": None,
+            "disk": None,
+            "uptime": None,
+        },
+        {
+            "id": "hyperion",
+            "name": "Hyperion",
+            "role": "Home PC",
+            "status": "online",
+            "cpu": None,
+            "memory": None,
+            "disk": None,
+            "uptime": None,
+        },
+    ]

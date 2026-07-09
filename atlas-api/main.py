@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from devices import devices
 
@@ -20,36 +20,13 @@ def health():
     return {"status": "online"}
 
 @app.get("/devices")
-def devices():
-    return [
-        {
-            "id": "atlas",
-            "name": "Atlas",
-            "role": "Main Server",
-            "status": "online",
-            "cpu": None,
-            "memory": None,
-            "disk": None,
-            "uptime": None,
-        },
-        {
-            "id": "apollo",
-            "name": "Apollo",
-            "role": "Primary Workstation",
-            "status": "online",
-            "cpu": None,
-            "memory": None,
-            "disk": None,
-            "uptime": None,
-        },
-        {
-            "id": "hyperion",
-            "name": "Hyperion",
-            "role": "Home PC",
-            "status": "online",
-            "cpu": None,
-            "memory": None,
-            "disk": None,
-            "uptime": None,
-        },
-    ]
+def get_devices():
+    return devices
+
+@app.get("/devices/{device_id}")
+def get_device(device_id: str):
+    for device in devices:
+        if device["id"] == device_id:
+            return device
+
+    raise HTTPException(status_code=404, detail="Device not found")
