@@ -24,11 +24,11 @@ export default function ApiStatus() {
   }, []);
 
   return (
-    <div>
+    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
       {online ? (
-        <p>🟢 API Online</p>
+        <p style={{ color: "#e6edf3", fontSize: "1rem", margin: 0 }}>🟢 API Online</p>
       ) : (
-        <p>🔴 API Offline</p>
+        <p style={{ color: "#e6edf3", fontWeight: 700, fontSize: "1rem", margin: 0 }}>🔴 API Offline</p>
       )}
     </div>
   );

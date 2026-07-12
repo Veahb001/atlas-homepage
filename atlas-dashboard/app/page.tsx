@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import ApiStatus from "@/components/ApiStatus";
+import SystemSummary from "@/components/SystemSummary";
 
 type DeviceStatus = "online" | "offline";
 
@@ -80,6 +82,7 @@ export default function Home() {
             <ApiStatus />
           </div>
         </div>
+        <SystemSummary devices={devices} />
 
         {/* Device cards */}
         <div className="row g-4">
@@ -183,6 +186,7 @@ export default function Home() {
           </div> */}
         </div>
       </main>
+            
     </div>
   );
 }
