@@ -33,17 +33,38 @@ export default function Home() {
   const [devices, setDevices] = useState<Device[]>([]);
   const [loading, setLoading] = useState(true);
 
+//   useEffect(() => {
+//     fetch("http://localhost:8000/devices")
+//       .then((res) => res.json())
+//       .then((data) => {
+//       setDevices(data);
+//       setLoading(false);
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//       setLoading(false);
+//     });
+// }, []);
+
   useEffect(() => {
+  const fetchDevices = () => {
     fetch("http://localhost:8000/devices")
       .then((res) => res.json())
       .then((data) => {
-      setDevices(data);
-      setLoading(false);
-    })
-    .catch((err) => {
-      console.error(err);
-      setLoading(false);
-    });
+        setDevices(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  };
+
+  fetchDevices();
+
+  const interval = setInterval(fetchDevices, 5000);
+
+  return () => clearInterval(interval);
 }, []);
 
   if (loading) {
