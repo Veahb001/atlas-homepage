@@ -32,6 +32,7 @@ function statusColor(value: number) {
 export default function Home() {
   const [devices, setDevices] = useState<Device[]>([]);
   const [loading, setLoading] = useState(true);
+  const [lastUpdated, setLastUpdated] = useState<string>("Never");
 
 //   useEffect(() => {
 //     fetch("http://localhost:8000/devices")
@@ -52,6 +53,7 @@ export default function Home() {
       .then((res) => res.json())
       .then((data) => {
         setDevices(data);
+        setLastUpdated(new Date().toLocaleTimeString());
         setLoading(false);
       })
       .catch((err) => {
@@ -59,11 +61,8 @@ export default function Home() {
         setLoading(false);
       });
   };
-
   fetchDevices();
-
   const interval = setInterval(fetchDevices, 5000);
-
   return () => clearInterval(interval);
 }, []);
 
@@ -95,12 +94,39 @@ export default function Home() {
           <p style={{ color: "#58a6ff", fontFamily: "monospace", fontSize: "0.75rem", margin: 0 }}>
             OLYMPUS / HOME
           </p>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <h1 style={{ color: "#e6edf3", fontWeight: 700, fontSize: "1.5rem", margin: 0 }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <h1
+              style={{
+                color: "#e6edf3",
+                fontWeight: 700,
+                fontSize: "1.5rem",
+                margin: 0,
+              }}
+            >
               All Devices
             </h1>
 
-            <ApiStatus />
+            <div style={{ textAlign: "right" }}>
+              <ApiStatus />
+
+              <p
+                style={{
+                  margin: 0,
+                  marginTop: "0.25rem",
+                  color: "#8b949e",
+                  fontFamily: "monospace",
+                  fontSize: "0.75rem",
+                }}
+              >
+                Last Updated: {lastUpdated}
+              </p>
+            </div>
           </div>
         </div>
         <SystemSummary devices={devices} />
