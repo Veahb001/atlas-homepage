@@ -1,6 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from devices import devices
+from events import events
+from datetime import datetime
 
 import random
 
@@ -16,6 +18,18 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+def log_event(message: str, event_type: str = "system"):
+    events.insert(0, {
+        "time": datetime.now().strftime("%H:%M:%S"),
+        "message": message,
+        "type": event_type,
+    })
+
+    # Keep only the 50 most recent events
+    if len(events) > 50:
+        events.pop()
+
+log_event("API started")
 
 @app.get("/health")
 def health():
