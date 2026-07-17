@@ -8,6 +8,8 @@ devices = [
             "memory": None,
             "disk": None,
             "uptime": None,
+            "last_online": "Today 8:43",
+            "last_offline":"Yesterday 22:14"
         },
         {
             "id": "apollo",
@@ -18,6 +20,8 @@ devices = [
             "memory": None,
             "disk": None,
             "uptime": None,
+            "last_online": "Today 8:43",
+            "last_offline":"Yesterday 22:14"
         },
         {
             "id": "hyperion",
@@ -28,5 +32,7 @@ devices = [
             "memory": None,
             "disk": None,
             "uptime": None,
+            "last_online": "Today 8:43",
+            "last_offline":"Yesterday 22:14"
         },
     ]

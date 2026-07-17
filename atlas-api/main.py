@@ -59,7 +59,9 @@ def get_device(device_id: str):
             "cpu": random.randint(5, 80),
             "memory": random.randint(25, 90),
             "disk": random.randint(35, 70),
-            "uptime": f"{random.randint(0, 30)} days {random.randint(0, 24)} hours"
+            "uptime": f"{random.randint(0, 30)} days {random.randint(0, 24)} hours",
+            "last_online": "Today 8:43",
+            "last_offline":"Yesterday 22:14"
         })
 
     raise HTTPException(status_code=404, detail="Device not found")
