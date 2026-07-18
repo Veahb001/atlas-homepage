@@ -52,21 +52,16 @@ def get_devices():
 
 @app.get("/devices/{device_id}")
 def get_device(device_id: str):
-    updated = []
     for device in devices:
-        updated.append({
-            **device,
-            "cpu": random.randint(5, 80),
-            "memory": random.randint(25, 90),
-            "disk": random.randint(35, 70),
-            "uptime": f"{random.randint(0, 30)} days {random.randint(0, 24)} hours",
-            "last_online": "Today 8:43",
-            "last_offline":"Yesterday 22:14"
-        })
+        if device["id"] == device_id:
+            return {
+                **device,
+                "cpu": random.randint(5, 80),
+                "memory": random.randint(25, 90),
+                "disk": random.randint(35, 70),
+                "uptime": f"{random.randint(0, 30)} days {random.randint(0, 24)} hours",
+                "last_online": "Today 8:43",
+                "last_offline":"Yesterday 22:14"
+            }
 
     raise HTTPException(status_code=404, detail="Device not found")
-
-    #     if device["id"] == device_id:
-    #         return device
-
-    # raise HTTPException(status_code=404, detail="Device not found")

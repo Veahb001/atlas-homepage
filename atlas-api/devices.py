@@ -9,7 +9,12 @@ devices = [
             "disk": None,
             "uptime": None,
             "last_online": "Today 8:43",
-            "last_offline":"Yesterday 22:14"
+            "last_offline":"Yesterday 22:14",
+            "os": "Ubuntu Server 24.04",
+            "cpu_model": "Intel i5-6500",
+            "memory_total": "16 GB",
+            "storage": "512 GB SSD"
+
         },
         {
             "id": "apollo",
@@ -21,7 +26,11 @@ devices = [
             "disk": None,
             "uptime": None,
             "last_online": "Today 8:43",
-            "last_offline":"Yesterday 22:14"
+            "last_offline":"Yesterday 22:14",
+            "os": "Fedora Linux",
+            "cpu_model": "Ryzen 7",
+            "memory_total": "32 GB",
+            "storage": "1 TB SSD"
         },
         {
             "id": "hyperion",
@@ -33,6 +42,10 @@ devices = [
             "disk": None,
             "uptime": None,
             "last_online": "Today 8:43",
-            "last_offline":"Yesterday 22:14"
+            "last_offline":"Yesterday 22:14",
+            "os": "Windows 11",
+            "cpu_model": "Ryzen 7 7800X3D",
+            "memory_total": "64 GB",
+            "storage": "2 TB NVMe SSD"
         },
     ]

@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import ApiStatus from "@/components/ApiStatus";
 import SystemSummary from "@/components/SystemSummary";
+
 
 type DeviceStatus = "online" | "offline";
 
@@ -33,24 +34,18 @@ export default function Home() {
   const [devices, setDevices] = useState<Device[]>([]);
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<string>("Never");
-
-//   useEffect(() => {
-//     fetch("http://localhost:8000/devices")
-//       .then((res) => res.json())
-//       .then((data) => {
-//       setDevices(data);
-//       setLoading(false);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       setLoading(false);
-//     });
-// }, []);
+  const router = useRouter();
 
   useEffect(() => {
   const fetchDevices = () => {
     fetch("http://localhost:8000/devices")
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch devices");
+        }
+
+        return res.json();
+      })
       .then((data) => {
         setDevices(data);
         setLastUpdated(new Date().toLocaleTimeString());
@@ -135,13 +130,25 @@ export default function Home() {
         <div className="row g-4">
           {devices.map((device) => (
             <div key={device.id} className="col-12 col-md-6 col-xl-4">
-              <div style={{
+              <div 
+              onClick={() => router.push(`/devices/${device.id}`)}
+
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = "translateY(-3px)";
+              }}
+
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+              
+              style={{
                 background: "#161b22",
                 border: `1px solid ${device.status === "offline" ? "#f85149" : "#30363d"}`,
                 borderRadius: "8px",
                 padding: "1.5rem",
                 height: "100%",
                 cursor: "pointer",
+                transition: "border 0.2s ease, transform 0.2s ease",
               }}>
 
                 {/* Card Header*/}
