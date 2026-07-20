@@ -13,8 +13,14 @@ devices = [
             "os": "Ubuntu Server 24.04",
             "cpu_model": "Intel i5-6500",
             "memory_total": "16 GB",
-            "storage": "512 GB SSD"
-
+            "storage": "512 GB SSD",
+            "services": [
+                {"name": "Docker", "status": "running"},
+                {"name": "Homepage", "status": "running"},
+                {"name": "Tailscale", "status": "running"},
+                {"name": "Uptime Kuma", "status": "stopped"},
+                {"name": "SSH", "status": "available"}
+            ]
         },
         {
             "id": "apollo",

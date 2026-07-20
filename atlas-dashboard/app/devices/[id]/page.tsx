@@ -4,8 +4,14 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Sidebar from "@/components/Sidebar";
 import StatCard from "@/components/StatCard";
+import ServiceList from "@/components/ServiceList";
 
 type DeviceStatus = "online" | "offline";
+
+type Service = {
+  name: string;
+  status: string;
+};
 
 type Device = {
   id: string;
@@ -22,6 +28,8 @@ type Device = {
   cpu_model?: string;
   memory_total?: string;
   storage?: string;
+
+  services: Service[];
 };
 
 export default function DevicePage() {
@@ -228,6 +236,7 @@ export default function DevicePage() {
               <strong>Storage:</strong>{" "}
               {device.storage ?? "Unknown"}
             </div>
+            <ServiceList services={device.services} />
           </div>
         </div>
       </main>
