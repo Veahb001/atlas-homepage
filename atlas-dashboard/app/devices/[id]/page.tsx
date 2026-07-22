@@ -236,7 +236,8 @@ export default function DevicePage() {
               <strong>Storage:</strong>{" "}
               {device.storage ?? "Unknown"}
             </div>
-            <ServiceList services={device.services} />
+            /*Future feature: Service List*/
+            {/* <ServiceList services={device.services ?? []} /> */}
           </div>
         </div>
       </main>
