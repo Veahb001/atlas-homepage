@@ -1,3 +1,42 @@
+import requests
+
+def get_apollo_telemetry():
+
+    try:
+        response = requests.get(
+            "http://192.168.1.6:9000/telemetry",
+            timeout=2
+        )
+
+        return response.json()
+
+    except Exception:
+        return None
+
+def update_device_status():
+
+    telemetry = get_apollo_telemetry()
+
+    for device in devices:
+
+        if device["id"] == "apollo":
+
+            if telemetry:
+
+                device["status"] = "online"
+                device["cpu"] = telemetry["cpu"]
+                device["memory"] = telemetry["memory"]
+                device["disk"] = telemetry["disk"]
+                device["uptime"] = telemetry["uptime"]
+
+            else:
+
+                device["status"] = "offline"
+                device["cpu"] = None
+                device["memory"] = None
+                device["disk"] = None
+                device["uptime"] = None
+                
 devices = [
         {
             "id": "atlas",
