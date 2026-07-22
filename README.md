@@ -20,7 +20,7 @@ The dashboard currently supports:
 
 ## Dashboard Preview
 
-![Olympus Dashboard](Dashboard 2026-07-22.png)
+![Olympus Dashboard](atlas-homepage/Dashboard 2026-07-22.png)
 
 ## Architecture
 
