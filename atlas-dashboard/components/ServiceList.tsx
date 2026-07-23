@@ -1,12 +1,14 @@
-type Service = {
+type Item = {
   name: string;
   status: string;
 };
 
-export default function ServiceList({
-  services,
+export default function itemList({
+  title = "items",
+  items = []
 }: {
-  services: Service[];
+  title?: string;
+  items?: Item[];
 }) {
   return (
     <div
@@ -25,7 +27,7 @@ export default function ServiceList({
           fontFamily: "monospace",
         }}
       >
-        Services
+        {title}
       </h3>
 
       <div
@@ -35,9 +37,9 @@ export default function ServiceList({
           gap: "0.75rem",
         }}
       >
-        {services.map((service) => (
+        {items.map((item) => (
           <div
-            key={service.name}
+            key={item.name}
             style={{
               display: "flex",
               justifyContent: "space-between",
@@ -59,28 +61,27 @@ export default function ServiceList({
                   borderRadius: "50%",
                   display: "inline-block",
                   background:
-                    service.status === "running" ||
-                    service.status === "available"
+                    item.status === "running" ||
+                    item.status === "available"
                       ? "#3fb950"
                       : "#f85149",
                 }}
               />
-
               <span style={{ color: "#e6edf3" }}>
-                {service.name}
+                {item.name}
               </span>
             </div>
 
             <span
               style={{
                 color:
-                  service.status === "running" ||
-                  service.status === "available"
+                  item.status === "running" ||
+                  item.status === "available"
                     ? "#3fb950"
                     : "#f85149",
               }}
             >
-              {service.status}
+              {item.status}
             </span>
           </div>
         ))}

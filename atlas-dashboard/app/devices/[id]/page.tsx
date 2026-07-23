@@ -29,7 +29,9 @@ type Device = {
   memory_total?: string;
   storage?: string;
 
-  services: Service[];
+  services?: Service[];
+  containers?: Service[];
+  applications?: Service[];
 };
 
 export default function DevicePage() {
@@ -236,10 +238,23 @@ export default function DevicePage() {
               <strong>Storage:</strong>{" "}
               {device.storage ?? "Unknown"}
             </div>
-            /*Future feature: Service List*/
-            {/* <ServiceList services={device.services ?? []} /> */}
           </div>
         </div>
+        /*Service List*/
+            <ServiceList
+              title="Services"
+              items={device.services ?? []}
+            />
+
+            <ServiceList
+              title="Docker Containers"
+              items={device.containers ?? []}
+            />
+
+            <ServiceList
+              title="Applications"
+              items={device.applications ?? []}
+            />
       </main>
     </div>
   );

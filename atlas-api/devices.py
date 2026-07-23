@@ -76,6 +76,31 @@ devices = [
             "cpu_model": "Ryzen 7",
             "memory_total": "32 GB",
             "storage": "1 TB SSD"
+            #Fake data for service list testing
+            "services": [
+                {
+                    "name": "Apollo API",
+                    "status": "running"
+                }
+            ],
+
+            "containers": [
+                {
+                    "name": "Docker",
+                    "status": "running"
+                }
+            ],
+
+            "applications": [
+                {
+                    "name": "VS Code",
+                    "status": "running"
+                },
+                {
+                    "name": "Firefox",
+                    "status": "running"
+                }
+            ],
         },
         {
             "id": "hyperion",
